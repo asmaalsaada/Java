@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class DojoController {
-	@RequestMapping("/dojo")
-	public String index() {
-		return "The dojo is awesome!";
+	@RequestMapping("/{dojo}")
+	public String index(@PathVariable ("dojo") String s0) {
+		return "The " + s0 +  " is awesome!";
 	}//works
 	@RequestMapping("/{burbank}-dojo/")
 	public String burbnk(@PathVariable ("burbank") String s1) {
