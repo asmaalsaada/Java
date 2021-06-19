@@ -110,7 +110,9 @@
         <p>Activities : </p>
     </div>
     <article >
-     <c:out value="${activites}"/> 
+	<c:forEach items="${activites}" var="item">
+	   ${item}<br>
+	</c:forEach>
 <!-- the time and session// -->
     </article> 
      
