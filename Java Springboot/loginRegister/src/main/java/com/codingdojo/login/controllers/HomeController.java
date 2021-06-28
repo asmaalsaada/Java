@@ -22,14 +22,20 @@ public class HomeController {
 
  public HomeController(UserService userService, UserValidator userValidator) {
 		this.userService = userService;
-		this.userValidator = userValidator;
+		this. userValidator = userValidator;
 	}
 @RequestMapping("/registration")
- public String registerForm(@ModelAttribute("user") User user) {
+ public String registerForm(@ModelAttribute("user") User user,HttpSession session) {
+	if (session.getAttribute("userId")!=null) {
+		 return "redirect:/home";
+	 }
      return "register.jsp";
  }
  @RequestMapping("/login")
- public String login() {
+ public String login(HttpSession session) {
+	 if (session.getAttribute("userId")!=null) {
+		 return "redirect:/home";
+	 }
      return "login.jsp";
  }
  
@@ -51,7 +57,7 @@ public class HomeController {
  
  @RequestMapping(value="/login", method=RequestMethod.POST)
  public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
-	
+	 
 	 if(userService.authenticateUser(email, password)) {
 		 Long id = userService.findByEmail(email).getId();
 		 session.setAttribute("userId", id);
